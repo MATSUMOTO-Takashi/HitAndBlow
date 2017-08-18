@@ -21,14 +21,12 @@ public class Main {
 	private static Random GEN;
 
 	public static void main(String[] args) {
-		CommandReader reader = new CommandReader();
-		String line = null;
-
 		System.out.println("以下のコマンドを入力してください。");
-		System.out.println("ゲームを終了する： exit");
 		System.out.println("ゲームを開始する： 任意のキー");
+		System.out.println("ゲームを終了する： exit");
 
-		line = reader.readLine();
+		CommandReader reader = new CommandReader();
+		String line = reader.readLine();
 
 		if (line.equals("DEBUG")) {
 			DEBUG_MODE = true;
@@ -40,7 +38,7 @@ public class Main {
 			System.out.println("DEBUG: 正解： " + expected);
 		}
 
-		while (!(line == null || line.equals("exit"))) {
+		while (line != null && !line.equals("exit")) {
 			System.out.println("質問する数値を入力してください。");
 			line = reader.readLine();
 
@@ -60,7 +58,7 @@ public class Main {
 			}
 
 			int[] result = checkTheAnswer(expected, line);
-			System.out.println("入力値 " + line + " は、" + result[0] + "ヒット、" + result[1] + "ブロウです。");
+			System.out.println("入力値 " + line + " は、" + result[0] + "ヒット、" + result[1] + "ブローです。");
 
 			// ゲームクリア
 			if (result[0] == DIGITS) {
@@ -129,6 +127,7 @@ public class Main {
 }
 
 class CommandReader {
+
 	private Console console;
 	private BufferedReader reader;
 
@@ -150,4 +149,5 @@ class CommandReader {
 			throw new RuntimeException(e);
 		}
 	}
+
 }
